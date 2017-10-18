@@ -1,0 +1,145 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "I21ZDprdd0n98lXaL8Kc79Ypihs=",
+			"path": "github.com/go-ini/ini",
+			"revision": "5b3e00af70a9484542169a976dcab8d03e601a17",
+			"revisionTime": "2017-10-14T21:05:30Z"
+		},
+		{
+			"checksumSHA1": "q8VfSvQ6fZY+QwtlMPtQsJrNews=",
+			"path": "github.com/minio/go-homedir",
+			"revision": "21304a94172ae3a09dee2cd86a12fb6f842138c7",
+			"revisionTime": "2016-02-15T11:55:11Z"
+		},
+		{
+			"checksumSHA1": "y85Ghxr4PMckHB0xiucllenN+Ic=",
+			"path": "github.com/minio/minio-go",
+			"revision": "944f2387ee2e8cb0b81824f49881903533027e87",
+			"revisionTime": "2017-10-17T08:09:55Z"
+		},
+		{
+			"checksumSHA1": "qPt3l9ZUjG0J4oZNTSrKy17rts0=",
+			"path": "github.com/minio/minio-go/pkg/credentials",
+			"revision": "944f2387ee2e8cb0b81824f49881903533027e87",
+			"revisionTime": "2017-10-17T08:09:55Z"
+		},
+		{
+			"checksumSHA1": "pggIpSePizRBQ7ybhB0CuaSQydw=",
+			"path": "github.com/minio/minio-go/pkg/encrypt",
+			"revision": "944f2387ee2e8cb0b81824f49881903533027e87",
+			"revisionTime": "2017-10-17T08:09:55Z"
+		},
+		{
+			"checksumSHA1": "3tl2ehmod/EzXE9o9WJ5HM2AQPE=",
+			"path": "github.com/minio/minio-go/pkg/policy",
+			"revision": "944f2387ee2e8cb0b81824f49881903533027e87",
+			"revisionTime": "2017-10-17T08:09:55Z"
+		},
+		{
+			"checksumSHA1": "XQ8eecf1JIlTDk0T6YAV5zvMyAM=",
+			"path": "github.com/minio/minio-go/pkg/s3signer",
+			"revision": "944f2387ee2e8cb0b81824f49881903533027e87",
+			"revisionTime": "2017-10-17T08:09:55Z"
+		},
+		{
+			"checksumSHA1": "P9p0KiZWh9shIFSqTaIeY4/KYXo=",
+			"path": "github.com/minio/minio-go/pkg/s3utils",
+			"revision": "944f2387ee2e8cb0b81824f49881903533027e87",
+			"revisionTime": "2017-10-17T08:09:55Z"
+		},
+		{
+			"checksumSHA1": "maUy+dbN6VfTTnfErrAW2lLit1w=",
+			"path": "github.com/minio/minio-go/pkg/set",
+			"revision": "944f2387ee2e8cb0b81824f49881903533027e87",
+			"revisionTime": "2017-10-17T08:09:55Z"
+		},
+		{
+			"checksumSHA1": "Ba/7hfojM9WTKs1vNPeHxm5hWdU=",
+			"path": "github.com/qiniu/api.v7/auth/qbox",
+			"revision": "0c661d0ca96771709f67b3d9eac10f27033b1f2a",
+			"revisionTime": "2017-09-25T09:20:37Z"
+		},
+		{
+			"checksumSHA1": "vXOa2JbY9nHrzVQVWfaeKSHE4Ac=",
+			"path": "github.com/qiniu/api.v7/conf",
+			"revision": "0c661d0ca96771709f67b3d9eac10f27033b1f2a",
+			"revisionTime": "2017-09-25T09:20:37Z"
+		},
+		{
+			"checksumSHA1": "/W+YqsorcAQZVCP0FKs+HgOy8eM=",
+			"path": "github.com/qiniu/api.v7/storage",
+			"revision": "0c661d0ca96771709f67b3d9eac10f27033b1f2a",
+			"revisionTime": "2017-09-25T09:20:37Z"
+		},
+		{
+			"checksumSHA1": "beTNGx1rXgzHQQKZzLDl6WJPafg=",
+			"path": "github.com/qiniu/x/bytes.v7",
+			"revision": "f512abcf45ab4e2ba0fd4784c57b53d495997d66",
+			"revisionTime": "2015-07-21T03:41:13Z"
+		},
+		{
+			"checksumSHA1": "g5gqSqUO071V3ULvUGWT8uaFB8g=",
+			"path": "github.com/qiniu/x/bytes.v7/seekable",
+			"revision": "f512abcf45ab4e2ba0fd4784c57b53d495997d66",
+			"revisionTime": "2015-07-21T03:41:13Z"
+		},
+		{
+			"checksumSHA1": "jQ+GU5c9c7b4Jq8gT1Oaa0Q9JUg=",
+			"path": "github.com/qiniu/x/ctype.v7",
+			"revision": "f512abcf45ab4e2ba0fd4784c57b53d495997d66",
+			"revisionTime": "2015-07-21T03:41:13Z"
+		},
+		{
+			"checksumSHA1": "H7jZDGNRIRPkKM2T6I5JjaqbTno=",
+			"path": "github.com/qiniu/x/rpc.v7",
+			"revision": "f512abcf45ab4e2ba0fd4784c57b53d495997d66",
+			"revisionTime": "2015-07-21T03:41:13Z"
+		},
+		{
+			"checksumSHA1": "OQVghp//ATup7BfCaB1BLjYTJb4=",
+			"path": "github.com/qiniu/x/xlog.v7",
+			"revision": "f512abcf45ab4e2ba0fd4784c57b53d495997d66",
+			"revisionTime": "2015-07-21T03:41:13Z"
+		},
+		{
+			"checksumSHA1": "dr5+PfIRzXeN+l1VG+s0lea9qz8=",
+			"path": "golang.org/x/net/context",
+			"revision": "a04bdaca5b32abe1c069418fb7088ae607de5bd0",
+			"revisionTime": "2017-10-03T05:09:24Z"
+		},
+		{
+			"checksumSHA1": "9t2exgz3OI0iupx2XzTY64dTNTI=",
+			"path": "qiniupkg.com/x/bytes.v7",
+			"revision": "f512abcf45ab4e2ba0fd4784c57b53d495997d66",
+			"revisionTime": "2015-07-21T03:41:13Z"
+		},
+		{
+			"checksumSHA1": "TeAfwkuKkelqJ9HJ56Z3sboLxhE=",
+			"path": "qiniupkg.com/x/log.v7",
+			"revision": "f512abcf45ab4e2ba0fd4784c57b53d495997d66",
+			"revisionTime": "2015-07-21T03:41:13Z"
+		},
+		{
+			"checksumSHA1": "H8+RHqplH5pNwKVURcANz3Z7+8Y=",
+			"path": "qiniupkg.com/x/reqid.v7",
+			"revision": "f512abcf45ab4e2ba0fd4784c57b53d495997d66",
+			"revisionTime": "2015-07-21T03:41:13Z"
+		},
+		{
+			"checksumSHA1": "W5deq/yf1h3n4ogC6rnSswtjiOY=",
+			"path": "save_store",
+			"revision": "56606bccf983c248f9dccf54ec95453e7ddf0a32",
+			"revisionTime": "2017-10-19T06:06:07Z"
+		},
+		{
+			"checksumSHA1": "Z85jUf14pqqlj51LOBoCIDQOf2Y=",
+			"path": "save_store/store",
+			"revision": "56606bccf983c248f9dccf54ec95453e7ddf0a32",
+			"revisionTime": "2017-10-19T06:06:07Z"
+		}
+	],
+	"rootPath": "save_store"
+}

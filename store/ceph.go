@@ -3,13 +3,14 @@ package store
 import (
 	"github.com/minio/minio-go"
 	"log"
-	"strings"
+	"bytes"
+	"io/ioutil"
 )
 
 const (
 	endpoint = "cs54:8080"
 	accessKeyID = "Z8DFXNIGF71P8K71D0ZA"
-	secretAccessKey = "zuf+VI0k5TecQOjwowWzhfapKRUfJfhs041hphieEhIM"
+	secretAccessKey = "VI0k5TecQOjwowWzhfapKRUfJfhs041hphieEhIM"
 	useSSL = false
 	bucketName = "cephtest"
 )
@@ -39,22 +40,36 @@ func NewCeph() *Ceph {
 }
 
 func (c *Ceph) Upload(path string, fileBytes []byte) error {
-	pathes := strings.Split(path, "/")
-	lastIndex := len(pathes) - 1
-	fileName := pathes[lastIndex]
-	_, err := c.minioClient.FPutObject(bucketName, fileName, path, minio.PutObjectOptions{})
+	_, err := c.minioClient.PutObject(bucketName, path, bytes.NewReader(fileBytes), int64(len(fileBytes)), minio.PutObjectOptions{})
 	return err
 }
 
 func (c *Ceph) Get(path string) (fileBytes []byte, err error) {
-	return nil, nil
+	o, err := c.minioClient.GetObject(bucketName, path, minio.GetObjectOptions{})
+	if err != nil {
+		return
+	}
+	fileBytes, err = ioutil.ReadAll(o)
+	o.Close()
+	return
 }
 
 func (c *Ceph) Delete(path string) error {
-	return nil
+	return c.minioClient.RemoveObject(bucketName, path)
 }
 
 func (c *Ceph) List(prefix string, limit int) (fileNames []string, err error) {
-	return nil, nil
+	doneCh := make(chan struct{})
+
+	defer close(doneCh)
+
+	objectCh := c.minioClient.ListObjectsV2(bucketName, prefix, true, doneCh)
+	for object := range objectCh {
+		if object.Err != nil {
+			break
+		}
+		fileNames = append(fileNames, object.Key)
+	}
+	return
 }
 

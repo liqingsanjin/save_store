@@ -1,1 +1,4 @@
 .idea
+main
+*.png
+.DS_Store
