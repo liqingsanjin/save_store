@@ -2,6 +2,7 @@ package store
 
 import (
 	"github.com/minio/minio-go"
+
 	"log"
 	"bytes"
 	"io/ioutil"
