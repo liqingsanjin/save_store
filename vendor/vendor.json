@@ -135,6 +135,18 @@
 			"revisionTime": "2017-10-19T06:06:07Z"
 		},
 		{
+			"checksumSHA1": "l9UpqlaU2W+TmF4EOx5ucKlIF+8=",
+			"path": "save_store/cmd/storage",
+			"revision": "64bab47a98ce0b7cab8c7652fcf688c964eb0d8d",
+			"revisionTime": "2017-10-23T02:07:23Z"
+		},
+		{
+			"checksumSHA1": "E9HgktNLoqMB8fDxV19jAlRaXXQ=",
+			"path": "save_store/pkg/store",
+			"revision": "64bab47a98ce0b7cab8c7652fcf688c964eb0d8d",
+			"revisionTime": "2017-10-23T02:07:23Z"
+		},
+		{
 			"checksumSHA1": "Z85jUf14pqqlj51LOBoCIDQOf2Y=",
 			"path": "save_store/store",
 			"revision": "56606bccf983c248f9dccf54ec95453e7ddf0a32",
