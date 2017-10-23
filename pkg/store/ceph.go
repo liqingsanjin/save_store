@@ -3,24 +3,17 @@ package store
 import (
 	"github.com/minio/minio-go"
 
-	"log"
 	"bytes"
 	"io/ioutil"
-)
-
-const (
-	endpoint = "cs54:8080"
-	accessKeyID = "Z8DFXNIGF71P8K71D0ZA"
-	secretAccessKey = "VI0k5TecQOjwowWzhfapKRUfJfhs041hphieEhIM"
-	useSSL = false
-	bucketName = "cephtest"
+	"log"
 )
 
 type Ceph struct {
 	minioClient *minio.Client
+	bucketName  string
 }
 
-func NewCeph() *Ceph {
+func NewCeph(bucketName, endpoint, accessKeyID, secretAccessKey string, useSSL bool) *Ceph {
 	c := new(Ceph)
 	var err error
 	c.minioClient, err = minio.New(endpoint, accessKeyID, secretAccessKey, useSSL)
@@ -37,16 +30,17 @@ func NewCeph() *Ceph {
 			log.Fatalln(err)
 		}
 	}
+	c.bucketName = bucketName
 	return c
 }
 
 func (c *Ceph) Upload(path string, fileBytes []byte) error {
-	_, err := c.minioClient.PutObject(bucketName, path, bytes.NewReader(fileBytes), int64(len(fileBytes)), minio.PutObjectOptions{})
+	_, err := c.minioClient.PutObject(c.bucketName, path, bytes.NewReader(fileBytes), int64(len(fileBytes)), minio.PutObjectOptions{})
 	return err
 }
 
 func (c *Ceph) Get(path string) (fileBytes []byte, err error) {
-	o, err := c.minioClient.GetObject(bucketName, path, minio.GetObjectOptions{})
+	o, err := c.minioClient.GetObject(c.bucketName, path, minio.GetObjectOptions{})
 	if err != nil {
 		return
 	}
@@ -56,15 +50,15 @@ func (c *Ceph) Get(path string) (fileBytes []byte, err error) {
 }
 
 func (c *Ceph) Delete(path string) error {
-	return c.minioClient.RemoveObject(bucketName, path)
+	return c.minioClient.RemoveObject(c.bucketName, path)
 }
 
-func (c *Ceph) List(prefix string, limit int) (fileNames []string, err error) {
+func (c *Ceph) List(prefix, marker string, limit int) (fileNames []string, err error) {
 	doneCh := make(chan struct{})
 
 	defer close(doneCh)
 
-	objectCh := c.minioClient.ListObjectsV2(bucketName, prefix, true, doneCh)
+	objectCh := c.minioClient.ListObjectsV2(c.bucketName, prefix, true, doneCh)
 	for object := range objectCh {
 		if object.Err != nil {
 			break
@@ -73,4 +67,3 @@ func (c *Ceph) List(prefix string, limit int) (fileNames []string, err error) {
 	}
 	return
 }
-

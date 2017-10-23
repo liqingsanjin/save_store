@@ -6,7 +6,7 @@ import (
 	"os"
 	"strconv"
 
-	"save_store/store"
+	"save_store/pkg/store"
 )
 
 var st store.Store

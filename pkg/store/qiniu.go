@@ -4,31 +4,28 @@ import (
 	"github.com/qiniu/api.v7/auth/qbox"
 	"github.com/qiniu/api.v7/storage"
 
-	"fmt"
 	"bytes"
-	"net/http"
+	"fmt"
 	"io/ioutil"
-)
-
-const (
-	accessKey = "VjgieAVwG723rZomW6h0SRdEIXHe_vNnBDtDw527"
-	secretKey = "bnQc-7eEPnnN5LEolwfxbAQjwr07d85CShh9lfLg"
-	bucket    = "liqingsanjin"
-	domain    = "http://oxx1uk7mm.bkt.clouddn.com"
+	"net/http"
 )
 
 type Qiniu struct {
-	mac *qbox.Mac
-	cfg *storage.Config
+	mac           *qbox.Mac
+	cfg           *storage.Config
+	endpoint      string
 	bucketManager *storage.BucketManager
+	bucketName    string
 }
 
-func NewQiniu() *Qiniu {
+func NewQiniu(bucketName, endpoint, accessKey, secretKey string, useSSL bool) *Qiniu {
 	q := new(Qiniu)
 	q.mac = qbox.NewMac(accessKey, secretKey)
 	q.cfg = &storage.Config{
-		UseHTTPS: false,
+		UseHTTPS: useSSL,
 	}
+	q.endpoint = endpoint
+	q.bucketName = bucketName
 	q.bucketManager = storage.NewBucketManager(q.mac, q.cfg)
 	return q
 }
@@ -43,7 +40,7 @@ type MyPutRet struct {
 
 func (q *Qiniu) Upload(path string, fileBytes []byte) error {
 	var putPolicy = storage.PutPolicy{
-		Scope: fmt.Sprintf("%s:%s", bucket, path),
+		Scope:      fmt.Sprintf("%s:%s", q.bucketName, path),
 		ReturnBody: `{"key":"$(key)","hash":"$(etag)","fsize":$(fsize),"bucket":"$(bucket)","name":"$(x:name)"}`,
 	}
 	putPolicy.Expires = 7200
@@ -55,7 +52,7 @@ func (q *Qiniu) Upload(path string, fileBytes []byte) error {
 }
 
 func (q *Qiniu) Get(path string) (fileBytes []byte, err error) {
-	url := storage.MakePublicURL(domain, path)
+	url := storage.MakePublicURL(q.endpoint, path)
 	resp, err := http.Get(url)
 	if err != nil {
 		return
@@ -66,28 +63,16 @@ func (q *Qiniu) Get(path string) (fileBytes []byte, err error) {
 }
 
 func (q *Qiniu) Delete(path string) error {
-	return q.bucketManager.Delete(bucket, path)
+	return q.bucketManager.Delete(q.bucketName, path)
 }
 
-func (q *Qiniu) List(prefix string, limit int) (fileNames []string, err error) {
-	err = nil
-
-	marker := ""
-	delimiter := ""
-	for {
-		entries, _, nextMarker, hashNext, err := q.bucketManager.ListFiles(bucket, prefix, delimiter, marker, limit)
-		if err != nil {
-			fmt.Println("list error,", err)
-			break
-		}
-		for _, entry := range entries {
-			fileNames = append(fileNames, entry.Key)
-		}
-		if hashNext {
-			marker = nextMarker
-		} else {
-			break
-		}
+func (q *Qiniu) List(prefix, marker string, limit int) (fileNames []string, err error)  {
+	entries, _, _, _, err := q.bucketManager.ListFiles(q.bucketName, prefix, "", marker, limit)
+	if err != nil {
+		return
+	}
+	for _, entry := range entries {
+		fileNames = append(fileNames, entry.Key)
 	}
 	return
 }
